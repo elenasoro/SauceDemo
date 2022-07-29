@@ -9,6 +9,7 @@ public class InventoryPage extends BasePage{
     private By ITEM_PRICE = By.xpath("//*[@id='inventory_container']/div/div[1]/div[2]/div[2]/div");
     private By ADD_ITEM_BUTTON = By.id("add-to-cart-sauce-labs-backpack");
     private By CART_BUTTON = By.className("shopping_cart_link");
+    private By LINKEDIN_BUTTON = By.linkText("LinkedIn");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -36,4 +37,10 @@ public class InventoryPage extends BasePage{
         driver.findElement(CART_BUTTON).click();
         return this;
     }
+
+    public InventoryPage goToLinkedin() {
+        driver.findElement(LINKEDIN_BUTTON).click();
+        return this;
+    }
+
 }
