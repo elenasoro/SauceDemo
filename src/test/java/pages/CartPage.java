@@ -7,9 +7,15 @@ public class CartPage extends BasePage{
 
     private By ITEM_TITLE = By.className("inventory_item_name");
     private By ITEM_PRICE = By.className("inventory_item_price");
+    private By CHECKOUT_BUTTON = By.id("checkout");
 
     public CartPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public boolean isPageOpened() {
+        return driver.findElement(CHECKOUT_BUTTON).isDisplayed();
     }
 
     public String getItemText() {

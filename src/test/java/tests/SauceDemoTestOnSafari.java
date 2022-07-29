@@ -1,13 +1,12 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.InventoryPage;
 import pages.LoginFormPage;
 
-public class SauceDemoTest extends BaseTest {
+public class SauceDemoTestOnSafari extends BaseTestSafari {
 
     private final String USER_NAME = "standard_user";
     private final String PASSWORD = "secret_sauce";
