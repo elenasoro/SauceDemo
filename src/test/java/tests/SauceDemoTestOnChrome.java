@@ -1,14 +1,17 @@
 package tests;
 
+import drivermanager.ChromeDriverManager;
 import drivermanager.DriverManager;
 import models.LoginModel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.InventoryPage;
+import pages.LinkedinPage;
 import pages.LoginFormPage;
 import testdata.PrepareLoginData;
 
@@ -26,15 +29,13 @@ public class SauceDemoTestOnChrome extends BaseTestChrome {
                 .openLoginFormPage()
                 .inputUserName(loginModel.getLogin())
                 .inputPassword(loginModel.getPassword())
-                .clickLoginButton();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+                .clickLoginButton()
+                .removeTimeout();
         InventoryPage inventoryPage = new InventoryPage(driver);
-        inventoryPage.goToLinkedin();
-        ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-        driver.switchTo().window(tabs2.get(1));
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=nav-logo]")));
-        Assert.assertTrue(driver.findElement(By.cssSelector("[data-test-id=nav-logo]")).isDisplayed(), "Linkedin Logo not displayed");
+        inventoryPage.goToLinkedin().switchToNewTab();
+        LinkedinPage linkedinPage = new LinkedinPage(driver);
+        linkedinPage.waitForLogo();
+        Assert.assertTrue(linkedinPage.isLogoDisplayed(), "Linkedin Logo not displayed");
     }
 
     @Test

@@ -4,6 +4,8 @@ import constants.Urls;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginFormPage extends BasePage{
 
     private By USERNAME_INPUT = By.id("user-name");
@@ -37,5 +39,9 @@ public class LoginFormPage extends BasePage{
     public LoginFormPage clickLoginButton() {
         driver.findElement(LOGIN_BUTTON).click();
         return this;
+    }
+
+    public void removeTimeout() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
 }

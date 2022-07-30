@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+
 public class InventoryPage extends BasePage{
 
     private By ITEM_TITLE = By.xpath("//*[@id='inventory_container']/div/div[1]/div[2]/div[1]/a");
@@ -40,6 +42,12 @@ public class InventoryPage extends BasePage{
 
     public InventoryPage goToLinkedin() {
         driver.findElement(LINKEDIN_BUTTON).click();
+        return this;
+    }
+
+    public InventoryPage switchToNewTab() {
+        ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
         return this;
     }
 
