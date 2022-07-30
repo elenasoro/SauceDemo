@@ -7,9 +7,8 @@ import pages.CartPage;
 import pages.InventoryPage;
 import pages.LoginFormPage;
 import testdata.PrepareLoginData;
-import utils.FakeMessageGenerator;
 
-public class SauceDemoTestOnChrome extends BaseTestChrome {
+public class SauceDemoTestOnChrome extends BaseTest {
 
     @Test
     public void addItemToCartTest() {
