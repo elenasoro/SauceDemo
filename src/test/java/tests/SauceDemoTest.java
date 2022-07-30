@@ -8,7 +8,7 @@ import pages.InventoryPage;
 import pages.LoginFormPage;
 import testdata.PrepareLoginData;
 
-public class SauceDemoTestOnChrome extends BaseTest {
+public class SauceDemoTest extends BaseTest {
 
     @Test
     public void addItemToCartTest() {
