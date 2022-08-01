@@ -4,6 +4,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import utils.PropertyManager;
 
+import java.util.concurrent.TimeUnit;
+
 public class ChromeDriverManager extends DriverManager {
 
 
@@ -20,4 +22,5 @@ public class ChromeDriverManager extends DriverManager {
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
     }
+
 }
