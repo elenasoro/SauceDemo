@@ -1,32 +1,34 @@
 package tests;
 
+import models.LoginModel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.InventoryPage;
 import pages.LoginFormPage;
+import testdata.PrepareLoginData;
 
-public class SauceDemoTestOnSafari extends BaseTestSafari {
-
-    private final String USER_NAME = "standard_user";
-    private final String PASSWORD = "secret_sauce";
+public class SauceDemoTest extends BaseTest {
 
     @Test
     public void addItemToCartTest() {
 
         LoginFormPage loginFormPage = new LoginFormPage(driver);
-        loginFormPage.openLoginFormPage();
-        loginFormPage.inputUserName(USER_NAME);
-        loginFormPage.inputPassword(PASSWORD);
-        loginFormPage.clickLoginButton();
+        LoginModel loginModel = PrepareLoginData.getStandardUserCredentials();
+        loginFormPage
+                .openLoginFormPage()
+                .inputUserName(loginModel.getLogin())
+                .inputPassword(loginModel.getPassword())
+                .clickLoginButton();
 
         InventoryPage inventoryPage = new InventoryPage(driver);
+        Assert.assertTrue(inventoryPage.isPageOpened(), "Cart button isn't displayed");
         String itemTitle = inventoryPage.getItemText();
         String itemPrice = inventoryPage.getItemPrice();
-        inventoryPage.addItemToCart();
-        inventoryPage.goToCart();
+        inventoryPage.addItemToCart().goToCart();
 
         CartPage cartPage = new CartPage(driver);
+        Assert.assertTrue(cartPage.isPageOpened(), "Checkout button isn't displayed");
         String itemInCartTitle = cartPage.getItemText();
         String itemInCartPrice = cartPage.getItemPrice();
 
