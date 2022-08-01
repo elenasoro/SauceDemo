@@ -14,6 +14,11 @@ public class InventoryPage extends BasePage{
         super(driver);
     }
 
+    @Override
+    public boolean isPageOpened() {
+        return driver.findElement(CART_BUTTON).isDisplayed();
+    }
+
     public String getItemText() {
         return driver.findElement(ITEM_TITLE).getText();
     }
@@ -22,11 +27,13 @@ public class InventoryPage extends BasePage{
         return driver.findElement(ITEM_PRICE).getText();
     }
 
-    public void addItemToCart() {
+    public InventoryPage addItemToCart() {
         driver.findElement(ADD_ITEM_BUTTON).click();
+        return this;
     }
 
-    public void goToCart() {
+    public InventoryPage goToCart() {
         driver.findElement(CART_BUTTON).click();
+        return this;
     }
 }

@@ -14,19 +14,28 @@ public class LoginFormPage extends BasePage{
         super(driver);
     }
 
-    public void openLoginFormPage() {
+    @Override
+    public boolean isPageOpened() {
+        return driver.findElement(LOGIN_BUTTON).isDisplayed();
+    }
+
+    public LoginFormPage openLoginFormPage() {
         driver.get(Urls.SAUCEDEMO_LOGIN_URL);
+        return this;
     }
 
-    public void inputUserName(String userName) {
+    public LoginFormPage inputUserName(String userName) {
         driver.findElement(USERNAME_INPUT).sendKeys(userName);
+        return this;
     }
 
-    public void inputPassword(String password) {
+    public LoginFormPage inputPassword(String password) {
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
+    public LoginFormPage clickLoginButton() {
         driver.findElement(LOGIN_BUTTON).click();
+        return this;
     }
 }
