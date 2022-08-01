@@ -5,10 +5,29 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.InventoryPage;
+import pages.LinkedinPage;
 import pages.LoginFormPage;
 import testdata.PrepareLoginData;
 
 public class SauceDemoTest extends BaseTest {
+
+    @Test
+    public void switchTabsTest() {
+        LoginFormPage loginFormPage = new LoginFormPage(driver);
+        LoginModel loginModel = PrepareLoginData.getStandardUserCredentials();
+        loginFormPage
+                .openLoginFormPage()
+                .inputUserName(loginModel.getLogin())
+                .inputPassword(loginModel.getPassword())
+                .clickLoginButton()
+                .removeTimeout();
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.goToLinkedin().switchToNewTab();
+        LinkedinPage linkedinPage = new LinkedinPage(driver);
+        linkedinPage.waitForLogo();
+        Assert.assertTrue(linkedinPage.isLogoDisplayed(), "Linkedin Logo not displayed");
+    }
+
 
     @Test
     public void addItemToCartTest() {
