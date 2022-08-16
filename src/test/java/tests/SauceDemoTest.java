@@ -32,8 +32,8 @@ public class SauceDemoTest extends BaseTest {
         LOGGER.info(String.format("Open %s page", LoginFormPage.class.getName()));
         LOGGER.info("Input UserName");
         LOGGER.info("Input Password");
-//        InventoryPage inventoryPage = new InventoryPage(driverManager.getDriver());
-//        inventoryPage.goToLinkedin().switchToNewTab();
+        InventoryPage inventoryPage = new InventoryPage(driverManager.getDriver());
+        inventoryPage.goToLinkedin().switchToNewTab();
         LinkedinPage linkedinPage = new LinkedinPage(driverManager.getDriver());
         linkedinPage.waitForLogo();
         Assert.assertTrue(linkedinPage.isLogoDisplayed(), "Linkedin Logo not displayed");
