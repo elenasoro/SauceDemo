@@ -1,29 +1,46 @@
+
+
 package tests;
 
-import drivermanager.DriverFactory;
-import drivermanager.DriverManager;
 import drivermanager.DriverType;
+import drivermanager.threadlocalmanager.DriverThreadLocalManager;
+import drivermanager.threadlocalmanager.DriverThreadLocalManagerFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
+import utils.TestListeners;
 
+@Listeners(TestListeners.class)
 public class BaseTest {
 
-    public WebDriver driver;
-    public DriverManager driverManager;
+    DriverThreadLocalManager driverManager;
+
+    @BeforeClass
+    @Parameters({"browser"})
+    public void createManager(@Optional("chrome") String browser) {
+        DriverType type = null;
+        if(browser.equals("chrome")){
+            type = DriverType.CHROME;
+        } else if(browser.equals("safari")) {
+            type = DriverType.SAFARI;
+        }
+        DriverThreadLocalManagerFactory factory = new DriverThreadLocalManagerFactory();
+        driverManager = factory.getManager(type);
+    }
 
     @BeforeMethod
     public void setUp() {
-        DriverFactory driverFactory = new DriverFactory();
-        driverManager = driverFactory.getManager(DriverType.REMOTE);
+
         driverManager.createDriver();
-        driverManager.setTimeout();
         driverManager.startMaximize();
-        driver = driverManager.getDriver();
+        driverManager.setTimeout();
+    }
+
+    public WebDriver getDriver() {
+        return driverManager.getDriver();
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        driverManager.getDriver().quit();
     }
 }
